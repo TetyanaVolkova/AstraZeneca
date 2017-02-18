@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Grid, Col, Row, Panel, ListGroup, ListGroupItem, Button} from 'react-bootstrap'
+import {Grid, Col, Row, Panel, ListGroup, ListGroupItem} from 'react-bootstrap'
 import '../App.css';
 
 class RightNav extends Component {

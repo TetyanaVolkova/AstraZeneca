@@ -4,3 +4,16 @@
 .container {
   width: 90vw !important;
 }
+input{
+  padding: 5px;
+  margin: 33px;
+}
+h1 {
+  font-size: 30px !important;
+  color: black !important;
+}
+input[type="submit"] {
+  background-color: #a2b4e5;
+  border-radius: 5px;
+  width: 90px;
+}
