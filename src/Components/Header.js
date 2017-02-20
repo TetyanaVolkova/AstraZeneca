@@ -20,9 +20,25 @@ class Header extends Component {
       id:uuid.v1(),
       name:'',
       email:'',
-      instance:'',
-      submitted: false
+      instance:[],
+      submitted: false,
+      database: []
     }
+  }
+
+  getStatusFirebase(){
+
+      var arr = [];
+    firebase.database().ref('forms/').on('child_added', function(snapshot) {
+      arr.push(snapshot.val());
+      })
+      this.setState({database:arr}, function() {
+        console.log(this.state);
+      });
+  }
+
+  componentWillMount(){
+    this.getStatusFirebase();
   }
 
   handleNameChange(event){
@@ -36,42 +52,63 @@ class Header extends Component {
   }
 
   handleFormSubmit(event){
-console.log(this.state);
     firebase.database().ref('forms/'+this.state.id).set({
       name: this.state.name,
       email: this.state.email,
       instance: this.state.instance
     });
-
     this.setState({submitted:true});
+    event.preventDefault();
+  }
+
+  handleNewSubscription(event){
+    this.setState({submitted:false}, function() {
+    });
     event.preventDefault();
   }
 
   render() {
     let form;
-    let status;
-    if (this.state.submitted) {
-      status = 'Welcome ';
-      form = <div>{this.state.name + ' you subscribed for instance ' + this.state.instance}</div>
-    } else {
-      status = 'Subscribe: ';
+    let options = this.props.instances.map(function(instance){
+      return <option key={instance} value={instance}>{instance}</option>
+    });
+    if (!this.state.submitted) {
       form = <Form onSubmit={this.handleFormSubmit.bind(this)}>
-          <lable>Name:</lable>
+        <h1>Subscribe:
+          <lable> Name</lable>
             <input type="text" ref='name' placeholder="Enter Name..." onChange={this.handleNameChange.bind(this)} />
-          <lable>Email:</lable>
+          <lable>Email</lable>
             <input type="email" ref='email' placeholder="Enter Email..." onChange={this.handleNameChange.bind(this)} />
-          <lable>Instance:</lable>
-            <input type="text" ref='instance' placeholder="Enter Instance..." onChange={this.handleNameChange.bind(this)} />
-          <input type="submit" value="Submit" />
+          <lable>Instance</lable>
+            <select ref='instance' name="options[]" multiple="multiple" size="5" onChange={this.handleNameChange.bind(this)} >
+             {options}
+            </select>
+          <input type="submit" value="Subscribe" />
+        </h1>
+        </Form>
+    } else if (this.state.submitted){
+      form = <Form className="newSubscription" onSubmit={this.handleNewSubscription.bind(this)}>
+        <h2>Welcome {this.state.name}<span>, you subscribed for the instance </span> {this.state.instance}<span>, your email is  </span>{this.state.email}</h2>
+        <input type="submit" value="New Subscription" />
+        </Form>
+    } else {
+      form = <Form onSubmit={this.handleFormSubmit.bind(this)}>
+        <h1>Subscribe:
+          <lable> Name</lable>
+            <input type="text" ref='name' placeholder="Enter Name..." onChange={this.handleNameChange.bind(this)} />
+          <lable>Email</lable>
+            <input type="email" ref='email' placeholder="Enter Email..." onChange={this.handleNameChange.bind(this)} />
+          <lable>Instance</lable>
+            <select ref='instance' name="options[]" multiple="multiple" size="5" onChange={this.handleNameChange.bind(this)} >
+             {options}
+            </select>
+          <input type="submit" value="Subscribe" />
+        </h1>
         </Form>
     }
     return (
             <Navbar>
-              <Navbar.Header>
-                <Navbar.Brand>
-                  <h1>{status} </h1>
-                </Navbar.Brand>
-              </Navbar.Header>
+                  <h1><a href="https://api.status.salesforce.com/v1/instances" target="blink"> Salesforce Instances </a></h1>
                   {form}
             </Navbar>
     );

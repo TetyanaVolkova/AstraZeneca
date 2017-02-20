@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Grid, Col, Row, Panel, ListGroup, ListGroupItem} from 'react-bootstrap'
 import '../App.css';
 
-class RightNav extends Component {
+class LeftNav extends Component {
   render() {
     let allInstances;
     if(this.props.instances){
@@ -12,7 +12,7 @@ class RightNav extends Component {
         let environment = instance.environment;
         let key = instance.key;
         let releaseVersion = instance.releaseVersion;
-        let isActive = instance.isActive;
+        let isActive = instance.isActive.toString();
         let location = instance.location;
         let status = instance.status;
         return (
@@ -36,11 +36,12 @@ class RightNav extends Component {
       });
     }
     return (
-      <div>
+      <div className="leftNavContainer">
+        <h3>All Instances From Salesforce</h3>
         {allInstances}
       </div>
     );
   }
 }
 
-export default RightNav;
+export default LeftNav;
