@@ -66,11 +66,11 @@ class Header extends Component {
       form = <Form onSubmit={this.handleFormSubmit.bind(this)}>
         <h1>Subscribe:
           <lable> Name</lable>
-            <input type="text" ref='name' placeholder="Enter Name..." onChange={this.handleNameChange.bind(this)} />
+            <input type="text" ref='name' placeholder="Enter Name..." onChange={this.handleNameChange.bind(this)} required/>
           <lable>Email</lable>
-            <input type="email" ref='email' placeholder="Enter Email..." onChange={this.handleNameChange.bind(this)} />
+            <input type="email" ref='email' placeholder="Enter Email..." onChange={this.handleNameChange.bind(this)} required/>
           <lable>Instance</lable>
-            <select ref='instance' name="options[]" multiple="multiple" size="5" onChange={this.handleNameChange.bind(this)} >
+            <select ref='instance' name="options[]" multiple="multiple" size="5" onChange={this.handleNameChange.bind(this)} required>
              {options}
             </select>
           <input type="submit" value="Subscribe" />

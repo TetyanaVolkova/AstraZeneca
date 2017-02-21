@@ -40,7 +40,7 @@ class App extends Component {
         <Header instances={this.state.instances} />
         <Grid>
           <Row className="rowContainer">
-            <Col xs={4} md={4} lg={4} className="LeftNavCol">
+            <Col xs={4} md={4} lg={4} className="LeftNavCol" data-simplebar data-simplebar-autohide="false">
               <LeftNav instances={this.state.instances}/>
             </Col>
             <Col xs={4} md={4} lg={4} className="middleCol">
