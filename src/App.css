@@ -1,12 +1,23 @@
-.App {
-  overflow: hidden;
+html {
+  height: calc(100vh - 240px);
 }
-
+body, .App {
+  height: 100%;
+}
+.rowContainer {
+  height: 100%;
+}
 .container {
-  overflow: hidden;
-  width: 90vw !important;
+  height: 100%;
+  width: 95vw !important;
 }
-
+.LeftNavCol, .RightNavCol {
+  height: 100%;
+  width: 30%;
+  margin-top: 240px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 .navbar .container, .navbar {
   position: fixed;
   top: 0;
@@ -19,7 +30,6 @@
 }
 .leftNavContainer {
   position: relative;
-  top: 260px;
 }
 input, select {
   font-size: 16px;

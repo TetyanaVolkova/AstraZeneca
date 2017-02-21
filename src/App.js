@@ -38,14 +38,14 @@ class App extends Component {
       <div className="App">
         <Header instances={this.state.instances} />
         <Grid>
-          <Row>
-            <Col xs={4} md={4} lg={4}>
+          <Row className="rowContainer">
+            <Col xs={4} md={4} lg={4} className="LeftNavCol">
               <LeftNav instances={this.state.instances}/>
             </Col>
             <Col xs={4} md={4} lg={4}>
               <div>Hey</div>
             </Col>
-            <Col xs={4} md={4} lg={4}>
+            <Col xs={4} md={4} lg={4} className="RightNavCol">
               <RightNav databaseForRightNav={this.state.instances}/>
             </Col>
         </Row>
