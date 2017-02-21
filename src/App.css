@@ -6,17 +6,23 @@ body, .App {
 }
 .rowContainer {
   height: 100%;
+  margin-top: 220px;
+  padding-bottom: 20px;
 }
 .container {
   height: 100%;
   width: 95vw !important;
 }
-.LeftNavCol, .RightNavCol {
+.LeftNavCol, .RightNavCol, .middleCol {
   height: 100%;
   width: 30%;
-  margin-top: 240px;
   overflow-y: auto;
   overflow-x: hidden;
+}
+.middleCol {
+  text-align: center;
+  width: 38%;
+  margin-left: 10px;
 }
 .navbar .container, .navbar {
   position: fixed;
@@ -27,6 +33,14 @@ body, .App {
   text-align: center;
   vertical-align: middle;
   z-index: 999;
+}
+.numberButton {
+  cursor: default;
+  background: #a2b4e5;
+  font-size: 26px;
+  height: 40px;
+  width: 60px;
+  border: 0;
 }
 .leftNavContainer {
   position: relative;

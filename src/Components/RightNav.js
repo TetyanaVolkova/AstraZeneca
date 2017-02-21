@@ -34,6 +34,9 @@ class RightNav extends Component {
 
   render() {
     let dataBase;
+    let title;
+    let numberOfAllSubscribers = this.state.subscribers.length;
+    title = <h3>All Subscribers <button className="numberButton">{numberOfAllSubscribers}</button></h3>
     if(this.state.subscribers.length > 0){
       dataBase = this.state.subscribers.map(function(data, id) {
         let dataid = id + 1;
@@ -60,7 +63,7 @@ class RightNav extends Component {
     }
     return (
       <div className="leftNavContainer">
-        <h3>All Subscribers</h3>
+        {title}
         {dataBase}
       </div>
     );

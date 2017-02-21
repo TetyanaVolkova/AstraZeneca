@@ -5,6 +5,9 @@ import '../App.css';
 class LeftNav extends Component {
   render() {
     let allInstances;
+    let title;
+    let numberOfInstances = this.props.instances.length;
+    title = <h3>All Instances From Salesforce <button className="numberButton">{numberOfInstances}</button></h3>
     if(this.props.instances){
       allInstances = this.props.instances.map(function(instance, id) {
         let instanceId = id + 1;
@@ -37,7 +40,7 @@ class LeftNav extends Component {
     }
     return (
       <div className="leftNavContainer">
-        <h3>All Instances From Salesforce</h3>
+        {title}
         {allInstances}
       </div>
     );

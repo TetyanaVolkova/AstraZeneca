@@ -6,6 +6,7 @@ import './App.css';
 import Header from './Components/Header';
 import LeftNav from './Components/LeftNav';
 import RightNav from './Components/RightNav';
+import UserInfo from './Components/UserInfo';
 
 var config = {
   apiKey: "AIzaSyCDbP7ky35rLj3gYxJFGeSNbJ_qbaBXoUQ",
@@ -42,8 +43,8 @@ class App extends Component {
             <Col xs={4} md={4} lg={4} className="LeftNavCol">
               <LeftNav instances={this.state.instances}/>
             </Col>
-            <Col xs={4} md={4} lg={4}>
-              <div>Hey</div>
+            <Col xs={4} md={4} lg={4} className="middleCol">
+              <UserInfo />
             </Col>
             <Col xs={4} md={4} lg={4} className="RightNavCol">
               <RightNav databaseForRightNav={this.state.instances}/>
