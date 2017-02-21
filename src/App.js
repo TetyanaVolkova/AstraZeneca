@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+var firebase = require('firebase');
 import {Grid, Col, Row} from 'react-bootstrap';
 import axios from 'axios';
 import './App.css';
@@ -6,41 +7,36 @@ import Header from './Components/Header';
 import LeftNav from './Components/LeftNav';
 import RightNav from './Components/RightNav';
 
+var config = {
+  apiKey: "AIzaSyCDbP7ky35rLj3gYxJFGeSNbJ_qbaBXoUQ",
+  authDomain: "survey-f70d5.firebaseapp.com",
+  databaseURL: "https://survey-f70d5.firebaseio.com",
+  storageBucket: "survey-f70d5.appspot.com",
+  messagingSenderId: "181438816646"
+};
+firebase.initializeApp(config);
+
 class App extends Component {
   constructor(){
     super();
     this.state = {
-      instances:[],
-      allInstances:[]
-    }
+      instances:[]
+    };
   }
 
-  componentWillMount(){
-    this.getStatusSalesforceApi();
-  }
-
-  getStatusSalesforceApi(){
+  componentDidMount(){
     axios.request({
       method:'get',
       url:'https://api.status.salesforce.com/v1/instances'
     }).then((response) => {
-      this.setState({instances:response.data}, () => {
-        console.log(this.state.instances);
-      });
-      var allInstances = response.data.map(function(instance){
-          return instance.key;
-      });
-      this.setState({allInstances:allInstances}, () => {
-      });
-      }).catch((error) => {
-        console.log(error);
-      });
-    }
+      this.setState({instances:response.data});
+    });
+  }
 
   render() {
     return (
       <div className="App">
-        <Header subscribe={this.state.instances} instances={this.state.allInstances} />
+        <Header instances={this.state.instances} />
         <Grid>
           <Row>
             <Col xs={4} md={4} lg={4}>
@@ -50,7 +46,7 @@ class App extends Component {
               <div>Hey</div>
             </Col>
             <Col xs={4} md={4} lg={4}>
-              <RightNav instances={this.state.instances}/>
+              <RightNav databaseForRightNav={this.state.instances}/>
             </Col>
         </Row>
         </Grid>

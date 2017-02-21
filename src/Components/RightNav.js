@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-var uuid = require('uuid');
 var firebase = require('firebase');
 import {Grid, Col, Row, Panel, ListGroup, ListGroupItem} from 'react-bootstrap'
 import '../App.css';
@@ -7,36 +6,36 @@ import '../App.css';
 
 class RightNav extends Component {
 
-    constructor(props){
-      super(props);
-      this.state = {
-        id:uuid.v1(),
-        name:'',
-        email:'',
-        instance:[],
-        database: []
+  constructor(props){
+    super(props);
+    this.state = {
+      name:'',
+      email:'',
+      subscribers: [],
+    }
+  }
+
+  componentDidMount() {
+    var self = this;
+    firebase.database().ref('forms/').once('value').then(function(snapshot) {
+      var arr = [];
+      var data = snapshot.val();
+      console.log(data);
+      if (data) {
+        for(var item in data){
+          if (data.hasOwnProperty(item)) {
+            arr.push(data[item]);
+          }
+        }
       }
-    }
-
-    getStatusFirebase(){
-
-        var arr = [];
-      firebase.database().ref('forms/').on('child_added', function(snapshot) {
-        arr.push(snapshot.val());
-        })
-        this.setState({database:arr}, function() {
-          console.log(this.state);
-        });
-    }
-
-    componentWillMount(){
-      this.getStatusFirebase();
-    }
+      self.setState({subscribers: arr});
+    });
+  }
 
   render() {
-    let database;
-    if(this.state.database){
-      database = this.state.database.map(function(data, id) {
+    let dataBase;
+    if(this.state.subscribers.length > 0){
+      dataBase = this.state.subscribers.map(function(data, id) {
         let dataid = id + 1;
         let title = 'SUBSCRIBER # ' + dataid;
         let name = data.name;
@@ -62,7 +61,7 @@ class RightNav extends Component {
     return (
       <div className="leftNavContainer">
         <h3>All Subscribers</h3>
-        {database}
+        {dataBase}
       </div>
     );
   }

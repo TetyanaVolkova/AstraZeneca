@@ -4,15 +4,6 @@ var uuid = require('uuid');
 var firebase = require('firebase');
 import '../App.css';
 
-var config = {
-  apiKey: "AIzaSyCDbP7ky35rLj3gYxJFGeSNbJ_qbaBXoUQ",
-  authDomain: "survey-f70d5.firebaseapp.com",
-  databaseURL: "https://survey-f70d5.firebaseio.com",
-  storageBucket: "survey-f70d5.appspot.com",
-  messagingSenderId: "181438816646"
-};
-firebase.initializeApp(config);
-
 class Header extends Component {
   constructor(props){
     super(props);
@@ -33,7 +24,6 @@ class Header extends Component {
       arr.push(snapshot.val());
       })
       this.setState({database:arr}, function() {
-        console.log(this.state);
       });
   }
 
@@ -70,7 +60,7 @@ class Header extends Component {
   render() {
     let form;
     let options = this.props.instances.map(function(instance){
-      return <option key={instance} value={instance}>{instance}</option>
+      return <option key={instance.key} value={instance.key}>{instance.key}</option>
     });
     if (!this.state.submitted) {
       form = <Form onSubmit={this.handleFormSubmit.bind(this)}>
