@@ -44,7 +44,7 @@ class App extends Component {
               <LeftNav instances={this.state.instances}/>
             </Col>
             <Col xs={4} md={4} lg={4} className="middleCol">
-              <UserInfo />
+              <UserInfo alerts={this.state.instances} />
             </Col>
             <Col xs={4} md={4} lg={4} className="RightNavCol">
               <RightNav databaseForRightNav={this.state.instances}/>
